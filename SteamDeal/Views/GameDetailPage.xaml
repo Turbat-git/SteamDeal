@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage 
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="SteamDeal.Views.GameDetailPage"
+    BackgroundColor="#171a21"
+    Title="Game Details">
+
+    <VerticalStackLayout Padding="20" Spacing="20">
+
+        <Grid ColumnDefinitions="Auto,*,Auto" VerticalOptions="Start" HeightRequest="40">
+            <Image Source="hamburger_menu.png" HeightRequest="24" WidthRequest="24" />
+            <Image Source="steam_logo.png" HeightRequest="24" WidthRequest="100" HorizontalOptions="Center" />
+            <Image Source="user_icon.png" HeightRequest="24" WidthRequest="24" HorizontalOptions="End" />
+        </Grid>
+
+        <Frame CornerRadius="16" BackgroundColor="#232730" Padding="0" HorizontalOptions="FillAndExpand">
+            <Image Source="{Binding ImageUrl}" Aspect="AspectFit" HeightRequest="150" />
+        </Frame>
+
+        <Label Text="{Binding GameTitle}" FontSize="24" TextColor="White" FontAttributes="Bold" />
+        <Label Text="{Binding Description}" FontSize="14" TextColor="#adadad" />
+
+        <HorizontalStackLayout Spacing="12">
+            <VerticalStackLayout>
+                <Label Text="Old Price" FontSize="10" TextColor="#aaaaaa" />
+                <Label Text="{Binding OriginalPrice}" FontSize="14" TextColor="#adadad" />
+            </VerticalStackLayout>
+
+            <Label Text="{Binding PriceText}" FontSize="14" TextColor="White" />
+
+            <Frame BackgroundColor="#292e37" Padding="6" CornerRadius="6">
+                <Label Text="{Binding DealRating}" TextColor="LimeGreen" FontAttributes="Bold" />
+            </Frame>
+        </HorizontalStackLayout>
+
+        <Button 
+            Text="Add to wishlist to track prices" 
+            BackgroundColor="#66c0f4" 
+            TextColor="Black"
+            CornerRadius="10"
+            Clicked="OnAddToWishlistClicked"/>
+
+    </VerticalStackLayout>
+</ContentPage>

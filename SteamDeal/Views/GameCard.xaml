@@ -1,0 +1,53 @@
+﻿<?xml version = "1.0" encoding = "UTF-8" ?>
+<ContentView
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="SteamDeal.Views.GameCard">
+
+    <Frame 
+        Padding="0"
+        Margin="6"
+        CornerRadius="10"
+        BackgroundColor="#2A2A2A"
+        BorderColor="#3A3A3A"
+        HasShadow="True"
+        HeightRequest="{Binding CardHeight}"
+        WidthRequest="{Binding CardWidth}">
+
+        <Grid>
+            <Image Source="{Binding Thumb}" Aspect="AspectFill" />
+
+            <StackLayout 
+                BackgroundColor="#000000AA"     
+                Padding="6"
+                VerticalOptions="End"
+                Spacing="2">
+
+                <Label 
+                    Text="{Binding Title}"
+                    FontSize="12"
+                    TextColor="White"
+                    LineBreakMode="TailTruncation" />
+
+                <StackLayout Orientation="Horizontal" Spacing="4">
+                    <Label 
+                        Text="{Binding SalePrice, StringFormat='${0}'}"
+                        FontAttributes="Bold"
+                        TextColor="#90EE90"
+                        FontSize="12" />
+
+                    <Label 
+                        Text="{Binding NormalPrice, StringFormat='${0}'}"
+                        TextDecorations="Strikethrough"
+                        TextColor="#AAAAAA"
+                        FontSize="12" />
+
+                    <Label 
+                        Text="{Binding SavingsPercent, StringFormat='-{0}%'}"
+                        TextColor="#FFA500"
+                        FontSize="12" />
+                </StackLayout>
+            </StackLayout>
+        </Grid>
+    </Frame>
+</ContentView>
