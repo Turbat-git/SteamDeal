@@ -8,14 +8,12 @@
     Shell.FlyoutBehavior="Disabled"
     Title="SteamDeal">
 
-    <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
+    <TabBar>
+        <ShellContent Title="Deals" ContentTemplate="{DataTemplate local:MainPage}" />
+        <!-- TODO: Create these pages -->
+               <!-- <ShellContent Title="Wishlist" ContentTemplate="{DataTemplate views:WishlistPage}" /> -->
+               <!-- <ShellContent Title="Settings" ContentTemplate="{DataTemplate views:SettingsPage}" /> -->
+    </TabBar>
 
-    <ShellContent 
-        Title="Game Details Page"
-        ContentTemplate="{DataTemplate views:GameDetailPage}" 
-        Route="GameDetailPage" />
-
+    <ShellContent Route="GameDetailPage" ContentTemplate="{DataTemplate views:GameDetailPage}" />
 </Shell>

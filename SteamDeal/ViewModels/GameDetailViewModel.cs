@@ -8,20 +8,18 @@ namespace SteamDeal.ViewModels;
 
 public class GameDetailViewModel
 {
-    public string GameTitle { get; set; }
-    public string Description { get; set; }
-    public string ImageUrl { get; set; }
-    public string PriceText { get; set; }
-    public string OriginalPrice { get; set; }
-    public string DealRating { get; set; }
+    public string Title { get; set; }
+    public string Image { get; set; }
+    public string Price { get; set; }
+    public string NormalPrice { get; set; }
+    public string Savings { get; set; }
 
-    public GameDetailViewModel(GameDeal game)
+    public GameDetailViewModel(GameDetailResponse deal)
     {
-        GameTitle = game.Title;
-        ImageUrl = game.Thumb;
-        Description = game.SteamAppID != null ? $"Steam App ID: {game.SteamAppID}" : "No description available";
-        PriceText = $"${game.SalePrice}";
-        OriginalPrice = $"${game.NormalPrice}";
-        DealRating = $"{game.DealRating}/10";
+        Title = deal.GameInfo?.Title ?? "Unknown";
+        Image = deal.GameInfo?.Thumb;
+        Price = $"${deal.GameInfo?.SalePrice}";
+        NormalPrice = $"Original: ${deal.GameInfo?.RetailPrice}";
+        Savings = $"You save {deal.GameInfo?.Savings}%!";
     }
 }

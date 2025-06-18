@@ -15,6 +15,7 @@ namespace SteamDeal.Models
         public string NormalPrice { get; set; }
         public string Savings { get; set; }
         public string SteamAppID { get; set; }
+        public string DealID { get; set; }
 
         // Calculated property
         public string SavingsPercent =>

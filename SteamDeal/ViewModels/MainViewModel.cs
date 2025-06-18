@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net.Http.Json;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using SteamDeal.Models;
 using SteamDeal.Views;
 
@@ -13,6 +14,13 @@ namespace SteamDeal.ViewModels
     public class MainViewModel
     {
         public ObservableCollection<GameDeal> TopDeals { get; set; } = new();
+        public ICommand GameSelectedCommand { get; }
+
+        public MainViewModel()
+        {
+            GameSelectedCommand = new Command<GameDeal>(OnGameSelected);
+            LoadDealsAsync();
+        }
 
         public async Task LoadDealsAsync()
         {
@@ -45,10 +53,7 @@ namespace SteamDeal.ViewModels
             if (selectedGame == null)
                 return;
 
-            await Shell.Current.GoToAsync(nameof(GameDetailPage), true, new Dictionary<string, object>
-            {
-                { "SelectedGame", selectedGame }
-            });
+            await Shell.Current.GoToAsync($"///GameDetailPage?dealID={selectedGame.DealID}");
         }
     }
 }
