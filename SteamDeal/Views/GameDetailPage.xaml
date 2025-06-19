@@ -3,30 +3,20 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     x:Class="SteamDeal.Views.GameDetailPage"
-    BackgroundColor="#121212">
     Title="{Binding Title}"
+    BackgroundColor="#121212">
 
-    <VerticalStackLayout Padding="20" Spacing="20">
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="16">
 
-		<ScrollView>
-			<VerticalStackLayout Padding="20" Spacing="16">
+            <Image Source="{Binding Image}" Aspect="AspectFill" HeightRequest="200" />
 
-				<Image Source="{Binding Image}" Aspect="AspectFill" HeightRequest="200" />
+            <Label Text="{Binding Title}" FontSize="24" FontAttributes="Bold" TextColor="White" />
+            <Label Text="{Binding Price}" FontSize="16" TextColor="#90EE90" />
+            <Label Text="{Binding NormalPrice}" FontSize="14" TextColor="#999999" />
+            <Label Text="{Binding Savings}" FontSize="14" TextColor="#FFA500" />
 
-				<Label Text="{Binding Title}" FontSize="24" FontAttributes="Bold" TextColor="White" />
-				<Label Text="{Binding Price}" FontSize="16" TextColor="#90EE90" />
-				<Label Text="{Binding NormalPrice}" FontSize="14" TextColor="#999999" />
-				<Label Text="{Binding Savings}" FontSize="14" TextColor="#FFA500" />
+        </VerticalStackLayout>
+    </ScrollView>
 
-			</VerticalStackLayout>
-		</ScrollView>
-
-        <Button 
-            Text="Add to wishlist to track prices" 
-            BackgroundColor="#66c0f4" 
-            TextColor="Black"
-            CornerRadius="10"
-            Clicked="OnAddToWishlistClicked"/>
-
-    </VerticalStackLayout>
 </ContentPage>
