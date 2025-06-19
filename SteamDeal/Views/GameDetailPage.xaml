@@ -9,6 +9,37 @@
     <ScrollView>
         <VerticalStackLayout Padding="20" Spacing="16">
 
+            <Grid Padding="12" BackgroundColor="#232730" ColumnSpacing="10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <ImageButton 
+                    Source="hamburger_menu.png"
+                    HeightRequest="28"
+                    BackgroundColor="Transparent"
+                    VerticalOptions="Center"
+                    Grid.Column="0" />
+
+                <ImageButton
+                    Source="steam_logo.png"
+                    HeightRequest="32"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center"
+                    Grid.Column="1" 
+                    Clicked="OnSteamLogoClicked" />
+
+                <ImageButton 
+                    Source="user_icon.png"
+                    HeightRequest="32"
+                    BackgroundColor="Transparent"
+                    HorizontalOptions="End"
+                    VerticalOptions="Center"
+                    Grid.Column="2" />
+            </Grid>
+
             <Image Source="{Binding Image}" Aspect="AspectFill" HeightRequest="200" />
 
             <Label Text="{Binding Title}" FontSize="24" FontAttributes="Bold" TextColor="White" />

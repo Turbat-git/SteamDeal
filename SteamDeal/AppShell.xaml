@@ -9,7 +9,7 @@
     Title="SteamDeal">
 
     <TabBar>
-        <ShellContent Title="Deals" ContentTemplate="{DataTemplate local:MainPage}" />
+        <ShellContent Title="Deals" Route="MainPage" ContentTemplate="{DataTemplate local:MainPage}" />
         <!-- TODO: Create these pages -->
                <!-- <ShellContent Title="Wishlist" ContentTemplate="{DataTemplate views:WishlistPage}" /> -->
                <!-- <ShellContent Title="Settings" ContentTemplate="{DataTemplate views:SettingsPage}" /> -->

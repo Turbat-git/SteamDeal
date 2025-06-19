@@ -36,19 +36,53 @@ namespace SteamDeal.Views
 
         private async void LoadGameDetails(string dealId)
         {
+            var uri = $"https://www.cheapshark.com/api/1.0/deals?id={dealId}";
+            using var http = new HttpClient();
+
             try
             {
-                var uri = $"https://www.cheapshark.com/api/1.0/deals?id={dealId}";
-                using var http = new HttpClient();
-                var result = await http.GetFromJsonAsync<GameDetailResponse>(uri);
+                var responseMessage = await http.GetAsync(uri);
 
-                if (result != null)
-                    BindingContext = new GameDetailViewModel(result);
+                if (!responseMessage.IsSuccessStatusCode)
+                {
+                    if (responseMessage.StatusCode == System.Net.HttpStatusCode.NotFound)
+                    {
+                        System.Diagnostics.Debug.WriteLine($"⚠️ 404 - Deal not found for dealID: {dealId}");
+                        await DisplayAlert("Unavailable", "This deal is no longer available.", "OK");
+                        await Shell.Current.GoToAsync("//MainPage");
+                    }
+                    else
+                    {
+                        System.Diagnostics.Debug.WriteLine($"❌ API error: {responseMessage.StatusCode}");
+                        await DisplayAlert("Error", "Unable to load game details.", "OK");
+                        await Shell.Current.GoToAsync("//MainPage");
+                    }
+                    return;
+                }
+
+                var result = await responseMessage.Content.ReadFromJsonAsync<GameDetailResponse>();
+
+                if (result == null || result.GameInfo == null)
+                {
+                    System.Diagnostics.Debug.WriteLine($"⚠️ Incomplete deal data for dealID: {dealId}");
+                    await DisplayAlert("Unavailable", "Game details not available for this deal.", "OK");
+                    await Shell.Current.GoToAsync("//MainPage");
+                    return;
+                }
+
+                BindingContext = new GameDetailViewModel(result);
             }
-            catch
+            catch (Exception ex)
             {
-                await DisplayAlert("Error", "Failed to load game details.", "OK");
+                System.Diagnostics.Debug.WriteLine($"❌ Exception loading game detail for dealID {dealId}: {ex.Message}");
+                await DisplayAlert("Error", $"❌ Exception loading game detail for dealID {dealId}: {ex.Message}", "OK");
+                await Shell.Current.GoToAsync("//MainPage");
             }
+        }
+
+        private async void OnSteamLogoClicked(object sender, EventArgs e)
+        {
+            await Shell.Current.GoToAsync("//MainPage");
         }
     }
 }

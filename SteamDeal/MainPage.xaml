@@ -26,7 +26,7 @@
                     VerticalOptions="Center"
                     Grid.Column="0" />
 
-                <Image 
+                <ImageButton
                     Source="steam_logo.png"
                     HeightRequest="32"
                     HorizontalOptions="Center"
