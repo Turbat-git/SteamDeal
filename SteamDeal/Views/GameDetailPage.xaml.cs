@@ -84,5 +84,9 @@ namespace SteamDeal.Views
         {
             await Shell.Current.GoToAsync("//MainPage");
         }
+        public void OnHamburgerClicked(object sender, EventArgs e)
+        {
+            Shell.Current.FlyoutIsPresented = true;
+        }
     }
 }

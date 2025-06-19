@@ -21,10 +21,10 @@
 
         }
 
-        //TODO: Add logic to this Hamburger Clicked event
-        public void OnHamburgerClicked()
+        //TODO: Add more items to this Hamburger Clicked event
+        public void OnHamburgerClicked(object sender, EventArgs e)
         {
-
+            Shell.Current.FlyoutIsPresented = true;
         }
     }
 

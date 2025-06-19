@@ -24,6 +24,7 @@
                     HeightRequest="28"
                     BackgroundColor="Transparent"
                     VerticalOptions="Center"
+                    Clicked="OnHamburgerClicked"
                     Grid.Column="0" />
 
                 <ImageButton
