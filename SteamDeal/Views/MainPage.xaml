@@ -58,17 +58,7 @@
 
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <Frame Padding="0" HasShadow="False" BackgroundColor="Transparent">
-                            <Grid>
-                                <views:GameCard />
-
-                                <Grid.GestureRecognizers>
-                                    <TapGestureRecognizer
-                                        Command="{Binding Source={x:Reference ViewModel}, Path=GameSelectedCommand}"
-                                        CommandParameter="{Binding .}" />
-                                </Grid.GestureRecognizers>
-                            </Grid>
-                        </Frame>
+                        <views:GameCard />
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
