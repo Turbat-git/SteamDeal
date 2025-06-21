@@ -4,12 +4,12 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     x:Class="SteamDeal.Views.GameDetailPage"
     Title="{Binding Title}"
-    BackgroundColor="#121212">
+    BackgroundColor="{DynamicResource PageBackgroundColor}">
 
     <ScrollView>
         <VerticalStackLayout Padding="20" Spacing="16">
 
-            <Grid Padding="12" BackgroundColor="#232730" ColumnSpacing="10">
+            <Grid Padding="12" BackgroundColor="{DynamicResource FrameBackgroundColor}" ColumnSpacing="10">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="*" />
@@ -28,6 +28,7 @@
                     Source="steam_logo.png"
                     HeightRequest="32"
                     HorizontalOptions="Center"
+                    BackgroundColor="Transparent"
                     VerticalOptions="Center"
                     Grid.Column="1" 
                     Clicked="OnSteamLogoClicked" />
@@ -43,9 +44,9 @@
 
             <Image Source="{Binding Image}" Aspect="AspectFill" HeightRequest="200" />
 
-            <Label Text="{Binding Title}" FontSize="24" FontAttributes="Bold" TextColor="White" />
+            <Label Text="{Binding Title}" FontSize="24" FontAttributes="Bold" TextColor="{DynamicResource TextColorPrimary}" />
             <Label Text="{Binding Price}" FontSize="16" TextColor="#90EE90" />
-            <Label Text="{Binding NormalPrice}" FontSize="14" TextColor="#999999" />
+            <Label Text="{Binding NormalPrice}" FontSize="14" TextColor="{DynamicResource TextColorPrimary}" />
             <Label Text="{Binding Savings}" FontSize="14" TextColor="#FFA500" />
 
         </VerticalStackLayout>

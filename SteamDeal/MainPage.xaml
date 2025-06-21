@@ -4,7 +4,7 @@
              xmlns:viewmodels="clr-namespace:SteamDeal.ViewModels"
              xmlns:views="clr-namespace:SteamDeal.Views"
              x:Class="SteamDeal.MainPage"
-             BackgroundColor="#121212">
+             BackgroundColor="{DynamicResource PageBackgroundColor}">
 
     <ContentPage.BindingContext>
         <viewmodels:MainViewModel x:Name="ViewModel" />
@@ -12,7 +12,7 @@
 
     <ScrollView>
         <VerticalStackLayout Padding="16" Spacing="12">
-            <Grid Padding="12" BackgroundColor="#232730" ColumnSpacing="10">
+            <Grid Padding="12" BackgroundColor="{DynamicResource PageBackgroundColor}" ColumnSpacing="10">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="*" />
@@ -31,6 +31,7 @@
                     Source="steam_logo.png"
                     HeightRequest="32"
                     HorizontalOptions="Center"
+                    BackgroundColor="Transparent"
                     VerticalOptions="Center"
                     Grid.Column="1" />
                 
@@ -47,7 +48,7 @@
                 Text="Featured Games and Deals"
                 FontSize="24"
                 FontAttributes="Bold"
-                TextColor="White" />
+                TextColor="{DynamicResource TextColorPrimary}" />
 
             <CollectionView ItemsSource="{Binding TopDeals}">
                 <CollectionView.ItemsLayout>

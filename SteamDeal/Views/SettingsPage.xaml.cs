@@ -5,15 +5,17 @@ public partial class SettingsPage : ContentPage
 	public SettingsPage()
 	{
 		InitializeComponent();
-        ThemeSwitch.IsToggled = App.Current.UserAppTheme == AppTheme.Dark;
+        SetThemeToggle();
     }
 
     private void OnThemeToggled(object sender, ToggledEventArgs e)
     {
-        var newTheme = e.Value ? AppTheme.Dark : AppTheme.Light;
-        App.Current.UserAppTheme = newTheme;
 
-        Preferences.Set("UserTheme", newTheme.ToString());
+        if (Application.Current is App myapp)
+        {
+            myapp.UserAppTheme = ThemeSwitch.IsToggled ? AppTheme.Dark : AppTheme.Light;
+            Preferences.Set("AppDarkTheme", ThemeSwitch.IsToggled);
+        }
 
     }
     private async void OnSteamLogoClicked(object sender, EventArgs e)
@@ -24,4 +26,22 @@ public partial class SettingsPage : ContentPage
     {
         Shell.Current.FlyoutIsPresented = true;
     }
+    private void SetThemeToggle()
+    {
+        if (Application.Current is App myapp)
+        {
+            switch (myapp.UserAppTheme)
+            {
+                case AppTheme.Light:
+                    ThemeSwitch.IsToggled = false;
+                    break;
+                case AppTheme.Dark:
+                    ThemeSwitch.IsToggled = true;
+                    break;
+                default:
+                    ThemeSwitch.IsToggled = true;
+                    break;
+            }
+        }
+    }   
 }

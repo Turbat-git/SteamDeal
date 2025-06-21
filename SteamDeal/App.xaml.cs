@@ -7,14 +7,13 @@
             InitializeComponent();
 
             MainPage = new AppShell();
+            CheckTheme();
+        }
 
-            if (Preferences.ContainsKey("UserTheme"))
-            {
-                var theme = Preferences.Get("UserTheme", "Unspecified");
-                App.Current.UserAppTheme = Enum.TryParse<AppTheme>(theme, out var parsedTheme)
-                    ? parsedTheme
-                    : AppTheme.Unspecified;
-            }
+        private void CheckTheme()
+        {
+            bool isDarkMode = Preferences.Get("AppDarkTheme", false);
+            UserAppTheme = isDarkMode ? AppTheme.Dark : AppTheme.Light;
         }
     }
 }
