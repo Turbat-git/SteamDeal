@@ -9,6 +9,29 @@
     <ContentPage.BindingContext>
         <viewmodels:MainViewModel x:Name="ViewModel" />
     </ContentPage.BindingContext>
+    <Shell.TitleView>
+        <Grid ColumnDefinitions="Auto,*,Auto" Padding="10" VerticalOptions="Center">
+            
+            <BoxView WidthRequest="24" HeightRequest="1" Grid.Column="0" IsVisible="False" />
+            
+            <ImageButton
+                Source="steam_logo.png"
+                HeightRequest="28"
+                BackgroundColor="Transparent"
+                HorizontalOptions="Center"
+                VerticalOptions="Center"
+                Grid.Column="1" />
+
+            <ImageButton
+                Source="user_icon.png"
+                HeightRequest="28"
+                WidthRequest="28"
+                BackgroundColor="Transparent"
+                HorizontalOptions="End"
+                VerticalOptions="Center"
+                Grid.Column="2" />
+        </Grid>
+    </Shell.TitleView>
 
     <ScrollView>
         <VerticalStackLayout Padding="16" Spacing="12">
@@ -19,29 +42,7 @@
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
 
-                <ImageButton 
-                    Source="hamburger_menu.png"
-                    HeightRequest="28"
-                    BackgroundColor="Transparent"
-                    VerticalOptions="Center"
-                    Clicked="OnHamburgerClicked"
-                    Grid.Column="0" />
-
-                <ImageButton
-                    Source="steam_logo.png"
-                    HeightRequest="32"
-                    HorizontalOptions="Center"
-                    BackgroundColor="Transparent"
-                    VerticalOptions="Center"
-                    Grid.Column="1" />
-                
-                <ImageButton 
-                    Source="user_icon.png"
-                    HeightRequest="32"
-                    BackgroundColor="Transparent"
-                    HorizontalOptions="End"
-                    VerticalOptions="Center"
-                    Grid.Column="2" />
+               
             </Grid>
             
             <Label 
@@ -52,7 +53,7 @@
 
             <CollectionView ItemsSource="{Binding TopDeals}">
                 <CollectionView.ItemsLayout>
-                    <GridItemsLayout Orientation="Vertical" Span="2" />
+                    <GridItemsLayout Orientation="Vertical" Span="1" />
                 </CollectionView.ItemsLayout>
 
                 <CollectionView.ItemTemplate>
@@ -63,8 +64,8 @@
 
                                 <Grid.GestureRecognizers>
                                     <TapGestureRecognizer
-                    Command="{Binding Source={x:Reference ViewModel}, Path=GameSelectedCommand}"
-                    CommandParameter="{Binding .}" />
+                                        Command="{Binding Source={x:Reference ViewModel}, Path=GameSelectedCommand}"
+                                        CommandParameter="{Binding .}" />
                                 </Grid.GestureRecognizers>
                             </Grid>
                         </Frame>
