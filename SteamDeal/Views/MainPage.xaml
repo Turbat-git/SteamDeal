@@ -11,9 +11,9 @@
     </ContentPage.BindingContext>
     <Shell.TitleView>
         <Grid ColumnDefinitions="Auto,*,Auto" Padding="10" VerticalOptions="Center">
-            
+
             <BoxView WidthRequest="24" HeightRequest="1" Grid.Column="0" IsVisible="False" />
-            
+
             <ImageButton
                 Source="steam_logo.png"
                 HeightRequest="28"
@@ -42,14 +42,14 @@
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
 
-               
+
             </Grid>
-            
+
             <Label 
                 Text="Featured Games and Deals"
                 FontSize="24"
                 FontAttributes="Bold"
-                TextColor="{DynamicResource TextColorPrimary}" />
+                TextColor="{DynamicResource TextColorPrimary}"/>
 
             <CollectionView ItemsSource="{Binding TopDeals}">
                 <CollectionView.ItemsLayout>
@@ -58,7 +58,7 @@
 
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <views:GameCard />
+                        <views:GameCard TapCommand="{Binding Source={x:Reference ViewModel}, Path=GameSelectedCommand}" />
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>

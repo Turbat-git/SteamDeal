@@ -8,10 +8,10 @@
 
     <ContentView.GestureRecognizers>
         <TapGestureRecognizer
-        Command="{Binding BindingContext.GameSelectedCommand, Source={RelativeSource AncestorType={x:Type local:MainPage}}}"
-        CommandParameter="{Binding .}" />
+            Command="{Binding TapCommand, Source={x:Reference RootView}}"
+            CommandParameter="{Binding .}" />
     </ContentView.GestureRecognizers>
-    
+
     <Frame 
         Padding="0"
         Margin="6"
@@ -23,7 +23,7 @@
         WidthRequest="{Binding CardWidth}">
 
         <Grid>
-            <Image Source="{Binding Thumb}" Aspect="AspectFill" />
+            <Image Source="{Binding Thumb}" Aspect="AspectFill" InputTransparent="True"/>
 
             <!-- Dark overlay gradient -->
             <BoxView 
@@ -32,6 +32,7 @@
                 HeightRequest="50"
                 Opacity="0.5"
                 CornerRadius="0"
+                InputTransparent="True"
                 />
 
             <!-- Text and price block -->
@@ -39,31 +40,36 @@
                 Padding="6"
                 VerticalOptions="End"
                 Spacing="2"
-                BackgroundColor="Transparent">
+                BackgroundColor="Transparent"
+                InputTransparent="True">
 
                 <Label 
                     Text="{Binding Title}"
                     FontSize="14"
                     TextColor="{StaticResource White}"
-                    LineBreakMode="TailTruncation" />
+                    LineBreakMode="TailTruncation" 
+                    InputTransparent="True"/>
 
                 <StackLayout Orientation="Horizontal" Spacing="4">
                     <Label 
                         Text="{Binding SalePrice, StringFormat='${0}'}"
                         FontAttributes="Bold"
                         TextColor="#90EE90"
-                        FontSize="12" />
+                        FontSize="12" 
+                        InputTransparent="True"/>
 
                     <Label 
                         Text="{Binding NormalPrice, StringFormat='${0}'}"
                         TextDecorations="Strikethrough"
                         TextColor="{StaticResource White}"
-                        FontSize="12" />
+                        FontSize="12" 
+                        InputTransparent="True"/>
 
                     <Label 
                         Text="{Binding SavingsPercent, StringFormat='-{0}%'}"
                         TextColor="#FFA500"
-                        FontSize="12" />
+                        FontSize="12" 
+                        InputTransparent="True"  />
                 </StackLayout>
             </StackLayout>
         </Grid>
