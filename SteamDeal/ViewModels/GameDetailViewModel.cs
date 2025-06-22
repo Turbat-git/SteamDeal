@@ -16,10 +16,36 @@ public class GameDetailViewModel
 
     public GameDetailViewModel(GameDetailResponse deal)
     {
-        Title = deal.GameInfo?.Title ?? "Unknown";
-        Image = deal.GameInfo?.Thumb;
-        Price = $"${deal.GameInfo?.SalePrice}";
-        NormalPrice = $"Original: ${deal.GameInfo?.RetailPrice}";
-        Savings = $"You save {deal.GameInfo?.Savings}%!";
+        var gameInfo = deal?.GameInfo;
+
+        Title = gameInfo?.Title ?? "Unknown Game";
+        Image = gameInfo?.Thumb ?? "";
+
+        if (decimal.TryParse(gameInfo?.SalePrice, out var salePrice))
+        {
+            Price = $"${salePrice:F2}";
+        }
+        else
+        {
+            Price = "Price unavailable";
+        }
+
+        if (decimal.TryParse(gameInfo?.RetailPrice, out var retailPrice))
+        {
+            NormalPrice = $"Original: ${retailPrice:F2}";
+        }
+        else
+        {
+            NormalPrice = "Original price unavailable";
+        }
+
+        if (decimal.TryParse(gameInfo?.Savings, out var savingsPercent))
+        {
+            Savings = $"You save {savingsPercent:F0}%!";
+        }
+        else
+        {
+            Savings = "Savings unavailable";
+        }        
     }
 }
