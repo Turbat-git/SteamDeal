@@ -59,6 +59,7 @@ namespace SteamDeal.Views
                     }
                     return;
                 }
+
                 var result = await responseMessage.Content.ReadFromJsonAsync<GameDeal>();
 
                 if (result == null)
@@ -69,25 +70,52 @@ namespace SteamDeal.Views
                     return;
                 }
 
+                // Debug output to see what we got
+                System.Diagnostics.Debug.WriteLine($"📦 Received data:");
+                System.Diagnostics.Debug.WriteLine($"   Title: '{result.Title}'");
+                System.Diagnostics.Debug.WriteLine($"   Thumb: '{result.Thumb}'");
+                System.Diagnostics.Debug.WriteLine($"   SalePrice: '{result.SalePrice}'");
+                System.Diagnostics.Debug.WriteLine($"   NormalPrice: '{result.NormalPrice}'");
+                System.Diagnostics.Debug.WriteLine($"   Savings: '{result.Savings}'");
+
                 // Create a GameDetailResponse from the GameDeal for compatibility
                 var gameDetailResponse = new GameDetailResponse
                 {
                     GameInfo = new GameInfo
                     {
-                        Title = result.Title,
-                        SalePrice = result.SalePrice,
-                        RetailPrice = result.NormalPrice,
-                        Savings = result.Savings,
-                        Thumb = result.Thumb
+                        Title = result.Title ?? "Unknown Game",
+                        SalePrice = result.SalePrice ?? "0",
+                        RetailPrice = result.NormalPrice ?? "0",
+                        Savings = result.Savings ?? "0",
+                        Thumb = result.Thumb ?? ""
                     }
                 };
 
-                BindingContext = new GameDetailViewModel(gameDetailResponse);
+                // Debug the created response
+                System.Diagnostics.Debug.WriteLine($"🔧 Created GameInfo:");
+                System.Diagnostics.Debug.WriteLine($"   Title: '{gameDetailResponse.GameInfo.Title}'");
+                System.Diagnostics.Debug.WriteLine($"   Thumb: '{gameDetailResponse.GameInfo.Thumb}'");
+                System.Diagnostics.Debug.WriteLine($"   SalePrice: '{gameDetailResponse.GameInfo.SalePrice}'");
+                System.Diagnostics.Debug.WriteLine($"   RetailPrice: '{gameDetailResponse.GameInfo.RetailPrice}'");
+                System.Diagnostics.Debug.WriteLine($"   Savings: '{gameDetailResponse.GameInfo.Savings}'");
+
+                var viewModel = new GameDetailViewModel(gameDetailResponse);
+
+                // Debug the view model
+                System.Diagnostics.Debug.WriteLine($"🎯 Created ViewModel:");
+                System.Diagnostics.Debug.WriteLine($"   Title: '{viewModel.Title}'");
+                System.Diagnostics.Debug.WriteLine($"   Image: '{viewModel.Image}'");
+                System.Diagnostics.Debug.WriteLine($"   Price: '{viewModel.Price}'");
+                System.Diagnostics.Debug.WriteLine($"   NormalPrice: '{viewModel.NormalPrice}'");
+                System.Diagnostics.Debug.WriteLine($"   Savings: '{viewModel.Savings}'");
+
+                BindingContext = viewModel;
             }
             catch (Exception ex)
             {
                 System.Diagnostics.Debug.WriteLine($"❌ Exception loading game detail for dealID {dealId}: {ex.Message}");
-                await DisplayAlert("Error", $"❌ Exception loading game detail for dealID {dealId}: {ex.Message}", "OK");
+                System.Diagnostics.Debug.WriteLine($"❌ Stack trace: {ex.StackTrace}");
+                await DisplayAlert("Error", $"Failed to load game details: {ex.Message}", "OK");
                 await Shell.Current.GoToAsync("//MainPage");
             }
         }
