@@ -6,41 +6,33 @@
     Title="{Binding Title}"
     BackgroundColor="{DynamicResource PageBackgroundColor}">
 
+    <Shell.TitleView>
+        <Grid ColumnDefinitions="Auto,*,Auto" Padding="10" VerticalOptions="Center">
+
+            <BoxView WidthRequest="24" HeightRequest="1" Grid.Column="0" IsVisible="False" />
+
+            <ImageButton
+            Source="steam_logo.png"
+            HeightRequest="28"
+            BackgroundColor="Transparent"
+            HorizontalOptions="Center"
+            VerticalOptions="Center"
+            Clicked="OnSteamLogoClicked"
+            Grid.Column="1" />
+
+            <ImageButton
+            Source="user_icon.png"
+            HeightRequest="28"
+            WidthRequest="28"
+            BackgroundColor="Transparent"
+            HorizontalOptions="End"
+            VerticalOptions="Center"
+            Grid.Column="2" />
+        </Grid>
+    </Shell.TitleView>
+
     <ScrollView>
         <VerticalStackLayout Padding="20" Spacing="16">
-
-            <Grid Padding="12" BackgroundColor="{DynamicResource FrameBackgroundColor}" ColumnSpacing="10">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="Auto" />
-                </Grid.ColumnDefinitions>
-
-                <ImageButton 
-                    Source="hamburger_menu.png"
-                    HeightRequest="28"
-                    BackgroundColor="Transparent"
-                    VerticalOptions="Center"
-                    Clicked="OnHamburgerClicked"
-                    Grid.Column="0" />
-
-                <ImageButton
-                    Source="steam_logo.png"
-                    HeightRequest="32"
-                    HorizontalOptions="Center"
-                    BackgroundColor="Transparent"
-                    VerticalOptions="Center"
-                    Grid.Column="1" 
-                    Clicked="OnSteamLogoClicked" />
-
-                <ImageButton 
-                    Source="user_icon.png"
-                    HeightRequest="32"
-                    BackgroundColor="Transparent"
-                    HorizontalOptions="End"
-                    VerticalOptions="Center"
-                    Grid.Column="2" />
-            </Grid>
 
             <Image Source="{Binding Image}" Aspect="AspectFill" HeightRequest="200" />
 
