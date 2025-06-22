@@ -6,12 +6,6 @@
     xmlns:local="clr-namespace:SteamDeal"
     x:Name="RootView">
 
-    <ContentView.GestureRecognizers>
-        <TapGestureRecognizer
-            Command="{Binding TapCommand, Source={x:Reference RootView}}"
-            CommandParameter="{Binding .}" />
-    </ContentView.GestureRecognizers>
-
     <Frame 
         Padding="0"
         Margin="6"
@@ -21,6 +15,12 @@
         HasShadow="True"
         HeightRequest="{Binding CardHeight}"
         WidthRequest="{Binding CardWidth}">
+
+        <Frame.GestureRecognizers>
+            <TapGestureRecognizer
+                Command="{Binding TapCommand, Source={x:Reference RootView}}"
+                CommandParameter="{Binding .}" />
+        </Frame.GestureRecognizers>
 
         <Grid>
             <Image Source="{Binding Thumb}" Aspect="AspectFill" InputTransparent="True"/>
