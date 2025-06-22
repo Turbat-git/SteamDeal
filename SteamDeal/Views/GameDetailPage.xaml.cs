@@ -59,18 +59,30 @@ namespace SteamDeal.Views
                     }
                     return;
                 }
+                var result = await responseMessage.Content.ReadFromJsonAsync<GameDeal>();
 
-                var result = await responseMessage.Content.ReadFromJsonAsync<GameDetailResponse>();
-
-                if (result == null || result.GameInfo == null)
+                if (result == null)
                 {
-                    System.Diagnostics.Debug.WriteLine($"⚠️ Incomplete deal data for dealID: {dealId}");
+                    System.Diagnostics.Debug.WriteLine($"⚠️ No deal data returned for dealID: {dealId}");
                     await DisplayAlert("Unavailable", "Game details not available for this deal.", "OK");
                     await Shell.Current.GoToAsync("//MainPage");
                     return;
                 }
 
-                BindingContext = new GameDetailViewModel(result);
+                // Create a GameDetailResponse from the GameDeal for compatibility
+                var gameDetailResponse = new GameDetailResponse
+                {
+                    GameInfo = new GameInfo
+                    {
+                        Title = result.Title,
+                        SalePrice = result.SalePrice,
+                        RetailPrice = result.NormalPrice,
+                        Savings = result.Savings,
+                        Thumb = result.Thumb
+                    }
+                };
+
+                BindingContext = new GameDetailViewModel(gameDetailResponse);
             }
             catch (Exception ex)
             {
