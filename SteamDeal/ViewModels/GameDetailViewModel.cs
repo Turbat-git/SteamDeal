@@ -9,8 +9,8 @@ namespace SteamDeal.ViewModels;
 
 public class GameDetailViewModel
 {
-    public string GameTitle { get; set; }  
-    public string ImageUrl { get; set; }
+    public string Title { get; set; }
+    public string Image { get; set; }
     public string Price { get; set; }
     public string NormalPrice { get; set; }
     public string Savings { get; set; }
@@ -19,8 +19,8 @@ public class GameDetailViewModel
     {
         var gameInfo = deal?.GameInfo;
 
-        GameTitle = gameInfo?.Title ?? "Unknown Game";
-        ImageUrl = gameInfo?.Thumb ?? "";
+        Title = gameInfo?.Title ?? "Unknown Game";
+        Image = gameInfo?.Thumb ?? "";
 
         System.Diagnostics.Debug.WriteLine($"🎮 GameDetailViewModel - Processing:");
         System.Diagnostics.Debug.WriteLine($"   Raw SalePrice: '{gameInfo?.SalePrice}'");

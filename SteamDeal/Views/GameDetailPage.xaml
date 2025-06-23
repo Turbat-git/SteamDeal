@@ -4,7 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     x:Class="SteamDeal.Views.GameDetailPage"
     xmlns:views="clr-namespace:SteamDeal.Views"
-    Title="{Binding GameTitle}"
+    Title="{Binding Title}"
     BackgroundColor="{DynamicResource PageBackgroundColor}">
 
     <Shell.TitleView>
@@ -37,7 +37,7 @@
 
             <Image Source="{Binding Image}" Aspect="AspectFill" HeightRequest="200" />
 
-            <Label Text="{Binding GameTitle}" FontSize="24" FontAttributes="Bold" TextColor="{DynamicResource TextColorPrimary}" />
+            <Label Text="{Binding Title}" FontSize="24" FontAttributes="Bold" TextColor="{DynamicResource TextColorPrimary}" />
             <Label Text="{Binding Price}" FontSize="16" TextColor="#90EE90" />
             <Label Text="{Binding NormalPrice}" FontSize="14" TextColor="{DynamicResource TextColorPrimary}" />
             <Label Text="{Binding Savings}" FontSize="14" TextColor="#FFA500" />
