@@ -16,6 +16,9 @@ public class GameInfo
     [JsonPropertyName("name")]
     public string Name { get; set; }
 
+    [JsonPropertyName("steamAppID")]
+    public string SteamAppID { get; set; }
+
     [JsonPropertyName("thumb")]
     public string Thumb { get; set; }
 

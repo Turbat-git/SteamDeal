@@ -42,6 +42,22 @@
             <Label Text="{Binding NormalPrice}" FontSize="14" TextColor="{DynamicResource TextColorPrimary}" />
             <Label Text="{Binding Savings}" FontSize="14" TextColor="#FFA500" />
 
+            <Button 
+                Text="{Binding WishlistButtonText}"
+                Command="{Binding ToggleWishlistCommand}"
+                BackgroundColor="{Binding WishlistButtonColor}"
+                TextColor="White"
+                FontSize="16"
+                FontAttributes="Bold"
+                Padding="15"
+                CornerRadius="8"
+                Margin="0,10,0,0" />
+
+            <!-- Additional game info could go here -->
+            <Label Text="Game Details" FontSize="18" FontAttributes="Bold" TextColor="{DynamicResource TextColorPrimary}" Margin="0,20,0,10" />
+
+            <Label Text="Tap the wishlist button to save this game for later!" FontSize="14" TextColor="Gray" />
+
         </VerticalStackLayout>
     </ScrollView>
 

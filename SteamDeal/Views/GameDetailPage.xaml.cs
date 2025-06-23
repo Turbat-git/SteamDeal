@@ -14,11 +14,13 @@ namespace SteamDeal.Views
     public partial class GameDetailPage : ContentPage
     {
         private GameInfo _selectedGame;
+        private string _currentDealId;
 
         public string DealID
         {
             set
             {
+                _currentDealId = value;
                 LoadGameDetails(value);
             }
         }
@@ -30,8 +32,8 @@ namespace SteamDeal.Views
 
         private void OnAddToWishlistClicked(object sender, EventArgs e)
         {
-            // TODO: Add logic for wishlisting a game
-            DisplayAlert("Wishlist", "Game added to your wishlist!", "OK");
+            // This method is now handled by the ViewModel's ToggleWishlistCommand
+            // Keeping it for backward compatibility, but it's no longer used
         }
 
         private async void LoadGameDetails(string dealId)
@@ -91,7 +93,8 @@ namespace SteamDeal.Views
 
                 System.Diagnostics.Debug.WriteLine($"✅ Successfully loaded game: {result.GameInfo.Name}");
 
-                BindingContext = new GameDetailViewModel(result);
+                // Pass the dealId to the ViewModel for wishlist functionality
+                BindingContext = new GameDetailViewModel(result, _currentDealId);
             }
             catch (Exception ex)
             {
