@@ -6,6 +6,31 @@
              x:Name="WishlistPageRoot"
              Title="Wishlist">
 
+    <Shell.TitleView>
+        <Grid ColumnDefinitions="Auto,*,Auto" Padding="10" VerticalOptions="Center">
+
+            <BoxView WidthRequest="24" HeightRequest="1" Grid.Column="0" IsVisible="False" />
+
+            <ImageButton
+                Source="steam_logo.png"
+                HeightRequest="28"
+                BackgroundColor="Transparent"
+                HorizontalOptions="Center"
+                VerticalOptions="Center"
+                Clicked="OnSteamLogoClicked"
+                Grid.Column="1" />
+
+            <ImageButton
+                Source="search.png"
+                HeightRequest="28"
+                WidthRequest="28"
+                BackgroundColor="Transparent"
+                HorizontalOptions="End"
+                VerticalOptions="Center"
+                Grid.Column="2" />
+        </Grid>
+    </Shell.TitleView>
+
     <ContentPage.Content>
         <StackLayout Padding="10">
             <CollectionView ItemsSource="{Binding WishlistItems}">
