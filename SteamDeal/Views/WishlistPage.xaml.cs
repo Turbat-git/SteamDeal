@@ -1,15 +1,15 @@
-﻿using SteamDeal.ViewModels;
+﻿using SteamDeal.Services;
+using SteamDeal.ViewModels;
 
 namespace SteamDeal.Views;
 
 public partial class WishlistPage : ContentPage
 {
-    public WishlistPage(WishlistViewModel viewModel)
+    public WishlistPage()
     {
         InitializeComponent();
-        BindingContext = viewModel;
+        BindingContext = new WishlistViewModel(); // uses parameterless constructor
     }
-
     private async void OnSteamLogoClicked(object sender, EventArgs e)
     {
         await Shell.Current.GoToAsync("//MainPage");
