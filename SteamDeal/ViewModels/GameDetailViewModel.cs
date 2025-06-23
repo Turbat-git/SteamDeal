@@ -9,8 +9,8 @@ namespace SteamDeal.ViewModels;
 
 public class GameDetailViewModel
 {
-    public string Title { get; set; }
-    public string Image { get; set; }
+    public string GameTitle { get; set; }  
+    public string ImageUrl { get; set; }
     public string Price { get; set; }
     public string NormalPrice { get; set; }
     public string Savings { get; set; }
@@ -19,14 +19,16 @@ public class GameDetailViewModel
     {
         var gameInfo = deal?.GameInfo;
 
-        Title = gameInfo?.Title ?? "Unknown Game";
-        Image = gameInfo?.Thumb ?? "";
+        GameTitle = gameInfo?.Title ?? "Unknown Game";
+        ImageUrl = gameInfo?.Thumb ?? "";
 
         System.Diagnostics.Debug.WriteLine($"🎮 GameDetailViewModel - Processing:");
         System.Diagnostics.Debug.WriteLine($"   Raw SalePrice: '{gameInfo?.SalePrice}'");
         System.Diagnostics.Debug.WriteLine($"   Raw RetailPrice: '{gameInfo?.RetailPrice}'");
         System.Diagnostics.Debug.WriteLine($"   Raw Savings: '{gameInfo?.Savings}'");
 
+
+        //For sale price parsing
         if (decimal.TryParse(gameInfo?.SalePrice, out var salePrice))
         {
             Price = $"${salePrice:F2}";
@@ -38,6 +40,7 @@ public class GameDetailViewModel
             System.Diagnostics.Debug.WriteLine($"   ❌ Failed to parse SalePrice: '{gameInfo?.SalePrice}'");
         }
 
+        //For normal pricing parcing
         if (decimal.TryParse(gameInfo?.RetailPrice, out var retailPrice))
         {
             NormalPrice = $"Original: ${retailPrice:F2}";
@@ -49,10 +52,21 @@ public class GameDetailViewModel
             System.Diagnostics.Debug.WriteLine($"   ❌ Failed to parse RetailPrice: '{gameInfo?.RetailPrice}'");
         }
 
-        if (decimal.TryParse(gameInfo?.Savings, out var savingsPercent))
+        //For saving calculation
+        if (!string.IsNullOrWhiteSpace(gameInfo?.Savings) && decimal.TryParse(gameInfo.Savings, out var savingsPercent))
         {
             Savings = $"You save {savingsPercent:F0}%!";
             System.Diagnostics.Debug.WriteLine($"   ✅ Parsed Savings: {Savings}");
+        }
+        else if (
+            decimal.TryParse(gameInfo?.RetailPrice, out var retail) &&
+            decimal.TryParse(gameInfo?.SalePrice, out var sale) &&
+            retail > 0
+        )
+        {
+            var calculatedSavings = ((retail - sale) / retail) * 100;
+            Savings = $"You save {calculatedSavings:F0}%!";
+            System.Diagnostics.Debug.WriteLine($"   🔄 Fallback Savings: {Savings}");
         }
         else
         {

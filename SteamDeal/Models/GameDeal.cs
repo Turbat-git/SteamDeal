@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,8 +17,5 @@ namespace SteamDeal.Models
         public string SteamAppID { get; set; }
         public string DealID { get; set; }
 
-        // Calculated property
-        public string SavingsPercent =>
-            int.TryParse(Savings?.Split('.')[0], out var val) ? val.ToString() : "0";
     }
 }
