@@ -54,6 +54,7 @@ namespace SteamDeal.ViewModels
                 return;
 
             await Shell.Current.GoToAsync($"///GameDetailPage?dealID={selectedGame.DealID}");
+            System.Diagnostics.Debug.WriteLine($"TAPPED: {selectedGame?.Title}");
         }
     }
 }

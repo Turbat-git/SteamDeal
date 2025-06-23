@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using Microsoft.Maui.Controls;
 using Microsoft.Maui.Controls.Xaml;
 
@@ -40,6 +41,16 @@ namespace SteamDeal.Views
         {
             get => (string)GetValue(ImageUrlProperty);
             set => SetValue(ImageUrlProperty, value);
+        }
+
+        // Add the TapCommand bindable property
+        public static readonly BindableProperty TapCommandProperty =
+            BindableProperty.Create(nameof(TapCommand), typeof(ICommand), typeof(GameCard), null);
+
+        public ICommand TapCommand
+        {
+            get => (ICommand)GetValue(TapCommandProperty);
+            set => SetValue(TapCommandProperty, value);
         }
     }
 }
