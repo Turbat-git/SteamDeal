@@ -52,12 +52,6 @@
                 Padding="15"
                 CornerRadius="8"
                 Margin="0,10,0,0" />
-
-            <!-- Additional game info could go here -->
-            <Label Text="Game Details" FontSize="18" FontAttributes="Bold" TextColor="{DynamicResource TextColorPrimary}" Margin="0,20,0,10" />
-
-            <Label Text="Tap the wishlist button to save this game for later!" FontSize="14" TextColor="Gray" />
-
         </VerticalStackLayout>
     </ScrollView>
 
