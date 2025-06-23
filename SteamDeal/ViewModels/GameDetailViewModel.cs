@@ -19,14 +19,14 @@ public class GameDetailViewModel
     {
         var gameInfo = deal?.GameInfo;
 
-        Title = gameInfo?.Title ?? "Unknown Game";
+        // Use 'Name' property instead of 'Title' since that's what the API returns
+        Title = gameInfo?.Name ?? "Unknown Game";
         Image = gameInfo?.Thumb ?? "";
 
         System.Diagnostics.Debug.WriteLine($"🎮 GameDetailViewModel - Processing:");
+        System.Diagnostics.Debug.WriteLine($"   Game Name: '{gameInfo?.Name}'");
         System.Diagnostics.Debug.WriteLine($"   Raw SalePrice: '{gameInfo?.SalePrice}'");
         System.Diagnostics.Debug.WriteLine($"   Raw RetailPrice: '{gameInfo?.RetailPrice}'");
-        System.Diagnostics.Debug.WriteLine($"   Raw Savings: '{gameInfo?.Savings}'");
-
 
         //For sale price parsing
         if (decimal.TryParse(gameInfo?.SalePrice, out var salePrice))
@@ -40,7 +40,7 @@ public class GameDetailViewModel
             System.Diagnostics.Debug.WriteLine($"   ❌ Failed to parse SalePrice: '{gameInfo?.SalePrice}'");
         }
 
-        //For normal pricing parcing
+        //For normal pricing parsing
         if (decimal.TryParse(gameInfo?.RetailPrice, out var retailPrice))
         {
             NormalPrice = $"Original: ${retailPrice:F2}";
@@ -53,25 +53,18 @@ public class GameDetailViewModel
         }
 
         //For saving calculation
-        if (!string.IsNullOrWhiteSpace(gameInfo?.Savings) && decimal.TryParse(gameInfo.Savings, out var savingsPercent))
-        {
-            Savings = $"You save {savingsPercent:F0}%!";
-            System.Diagnostics.Debug.WriteLine($"   ✅ Parsed Savings: {Savings}");
-        }
-        else if (
-            decimal.TryParse(gameInfo?.RetailPrice, out var retail) &&
+        if (decimal.TryParse(gameInfo?.RetailPrice, out var retail) &&
             decimal.TryParse(gameInfo?.SalePrice, out var sale) &&
-            retail > 0
-        )
+            retail > 0)
         {
             var calculatedSavings = ((retail - sale) / retail) * 100;
             Savings = $"You save {calculatedSavings:F0}%!";
-            System.Diagnostics.Debug.WriteLine($"   🔄 Fallback Savings: {Savings}");
+            System.Diagnostics.Debug.WriteLine($"   ✅ Calculated Savings: {Savings}");
         }
         else
         {
             Savings = "Savings unavailable";
-            System.Diagnostics.Debug.WriteLine($"   ❌ Failed to parse Savings: '{gameInfo?.Savings}'");
+            System.Diagnostics.Debug.WriteLine($"   ❌ Failed to calculate savings");
         }
     }
 }

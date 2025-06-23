@@ -36,12 +36,27 @@ namespace SteamDeal.Views
 
         private async void LoadGameDetails(string dealId)
         {
+            if (string.IsNullOrEmpty(dealId))
+            {
+                System.Diagnostics.Debug.WriteLine("❌ DealID is null or empty");
+                await DisplayAlert("Error", "Invalid deal ID.", "OK");
+                await Shell.Current.GoToAsync("//MainPage");
+                return;
+            }
+
             var uri = $"https://www.cheapshark.com/api/1.0/deals?id={dealId}";
             using var http = new HttpClient();
 
             try
             {
+                System.Diagnostics.Debug.WriteLine($"🔍 Loading game details for dealID: {dealId}");
+                System.Diagnostics.Debug.WriteLine($"🔍 API URL: {uri}");
+
                 var responseMessage = await http.GetAsync(uri);
+                var responseContent = await responseMessage.Content.ReadAsStringAsync();
+
+                System.Diagnostics.Debug.WriteLine($"📡 API Response Status: {responseMessage.StatusCode}");
+                System.Diagnostics.Debug.WriteLine($"📡 API Response Content: {responseContent}");
 
                 if (!responseMessage.IsSuccessStatusCode)
                 {
@@ -60,15 +75,21 @@ namespace SteamDeal.Views
                     return;
                 }
 
-                var result = await responseMessage.Content.ReadFromJsonAsync<GameDetailResponse>(); 
+                // Parse the full response which includes gameInfo wrapper
+                var result = JsonSerializer.Deserialize<GameDetailResponse>(responseContent, new JsonSerializerOptions
+                {
+                    PropertyNameCaseInsensitive = true
+                });
 
                 if (result == null || result.GameInfo == null)
                 {
-                    System.Diagnostics.Debug.WriteLine($"⚠️ Incomplete deal data for dealID: {dealId}");
+                    System.Diagnostics.Debug.WriteLine($"⚠️ Failed to deserialize game info for dealID: {dealId}");
                     await DisplayAlert("Unavailable", "Game details not available for this deal.", "OK");
                     await Shell.Current.GoToAsync("//MainPage");
                     return;
                 }
+
+                System.Diagnostics.Debug.WriteLine($"✅ Successfully loaded game: {result.GameInfo.Name}");
 
                 BindingContext = new GameDetailViewModel(result);
             }
@@ -94,6 +115,7 @@ namespace SteamDeal.Views
         {
             await Shell.Current.GoToAsync("//MainPage");
         }
+
         public void OnHamburgerClicked(object sender, EventArgs e)
         {
             Shell.Current.FlyoutIsPresented = true;
