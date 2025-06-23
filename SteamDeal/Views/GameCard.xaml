@@ -64,12 +64,6 @@
                         TextColor="{StaticResource White}"
                         FontSize="12" 
                         InputTransparent="True"/>
-
-                    <Label 
-                        Text="{Binding Savings, StringFormat='-{0}%'}"
-                        TextColor="#FFA500"
-                        FontSize="12" 
-                        InputTransparent="True"  />
                 </StackLayout>
             </StackLayout>
         </Grid>
